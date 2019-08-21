@@ -7,6 +7,7 @@ public class HelloWorld {
 		System.out.println("Propibe configurado y desde eclipse ahhh");
 		
 		/* Lucas aca pusheando de nuevo ;D */
+		/*recibido*/
 	}
 
 }
