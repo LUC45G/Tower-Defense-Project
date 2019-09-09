@@ -5,19 +5,26 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import logic.Mapa;
+import logic.Nivel;
+
 import java.awt.Color;
 
 public class Gui {
 
 	private JFrame frame;
 	private JPanel panelMapa;
-	private ImageIcon currentCharacterImage;
 	private Image currentCharacter;
+	private Nivel nivel;
+	private ArrayList<JLabel> labels;
 
 	/**
 	 * Launch the application.
@@ -46,6 +53,11 @@ public class Gui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		nivel = new Nivel( new Mapa(this) );
+		nivel.start();
+		labels = new ArrayList<JLabel>();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +73,7 @@ public class Gui {
 		panelPersonajes.add(btnPersonaje1);
 		
 		JButton btnPersonaje2 = new JButton("2");
+		btnPersonaje2.addActionListener(new btn2AL()); // ActionListener temporal para probar al enemigo
 		panelPersonajes.add(btnPersonaje2);
 		
 		JButton btnPersonaje3 = new JButton("3");
@@ -79,28 +92,63 @@ public class Gui {
 		agregarBotones();
 		frame.getContentPane().add(panelMapa);
 		
-		currentCharacterImage = null;
 		currentCharacter = null;
 	}
 	
 	@SuppressWarnings("serial")
 	private void agregarBotones() {
-		for(int i = 1; i <= 10; i++) {
-			for (int j = 1; j<=6; j++) {
-				JButton btn = new JButton( i + "," + j);
-				btn.addActionListener( new AbstractAction("btn"+i+j) {
+		for(int i = 1; i <= 6; i++) {
+			for (int j = 1; j<=10; j++) {
+				MyLabel lbl = new MyLabel("lbl"+j+","+i);
+				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
+				lbl.addActionListener( new AbstractAction("btn"+j+i) {
 				    public void actionPerformed(ActionEvent e) {
-				    	System.out.println("Clicked btn " + btn.getText());
+				    	System.out.println("Clicked " + lbl.getText());
 				        if(currentCharacter!=null) {
-				        	// currentCharacter = new JLabel(currentCharacterImage);
-				        	btn.setText("");
-				        	btn.setIcon( new ImageIcon(currentCharacter));
-				        	currentCharacter=null;
+				        	if(lbl.getIcon() == null) {
+					        	lbl.setText("");
+					        	lbl.setIcon( new ImageIcon(currentCharacter));
+					        	currentCharacter=null;
+				        	}
 				        }
 				    }
 				});
 				
-				panelMapa.add( btn );
+				labels.add(lbl);
+				panelMapa.add( lbl );
+			}
+		}
+		
+	}
+	
+	public void AgregarEnemigo(int y) {
+		Image enemyIcon = null;
+		
+		try {
+			enemyIcon = ImageIO.read(getClass().getResource("/images/p1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		JLabel lbl = labels.get(9*y + y - 1);
+		
+		if (lbl.getIcon()==null)
+			lbl.setIcon( new ImageIcon(enemyIcon) );
+	}
+	
+	public void AvanzarEnemigos() {
+		for(int i = 0; i < 60; i++) {
+			JLabel prevlbl = labels.get(i);
+			
+			if ( i % 10 == 0 ) {
+				if(prevlbl.getIcon()!=null) {
+					System.out.println("Perdiste");
+				}
+			}
+			else {
+				JLabel nextlbl = labels.get(i-1);
+				nextlbl.setIcon( prevlbl.getIcon() );
+				prevlbl.setIcon(null);
 			}
 		}
 	}
@@ -115,10 +163,23 @@ public class Gui {
 				panelMapa.repaint();
 				frame.repaint();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 		}
 	}
+	
+	private class btn2AL implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.out.println("Clicked btn 2");
+			
+			nivel.HordaHardcodeada();
+			
+			panelMapa.repaint();
+			frame.repaint();
+			
+		}
+	}
+	
 }

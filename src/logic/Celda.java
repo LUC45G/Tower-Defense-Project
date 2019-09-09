@@ -8,6 +8,11 @@ public class Celda {
 	
 	/* Constructor */
 	
+	public Celda(int x, int y ) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	/* Consultas */
 	
 	public int getX() { return x; }

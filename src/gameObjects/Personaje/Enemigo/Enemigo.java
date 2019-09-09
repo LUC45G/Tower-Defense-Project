@@ -1,4 +1,6 @@
-package gameObjects;
+package gameObjects.Personaje.Enemigo;
+import gameObjects.Item.Premio.Premio;
+import gameObjects.Personaje.Personaje;
 import logic.Celda;
 import logic.Mapa;
 
@@ -9,6 +11,16 @@ public abstract class Enemigo extends Personaje {
 	protected Celda celda;
 	
 	/* Constructor */
+	public Enemigo(Celda c, Mapa m) {
+		mapa = m;
+		celda = c;
+	}
+	
+	public Enemigo(Celda c, Mapa m, Premio p) {
+		mapa = m;
+		celda = c;
+		premio = p;
+	}
 	
 	/* Consultas */
 	
