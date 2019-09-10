@@ -8,17 +8,19 @@ public abstract class Enemigo extends Personaje {
 
 	protected Premio premio;
 	protected Mapa mapa;
-	protected Celda celda;
+	protected int x, y;
 	
 	/* Constructor */
-	public Enemigo(Celda c, Mapa m) {
+	public Enemigo(int a, int b, Mapa m) {
 		mapa = m;
-		celda = c;
+		x = a; 
+		y = b;
 	}
 	
-	public Enemigo(Celda c, Mapa m, Premio p) {
+	public Enemigo(int a, int b, Mapa m, Premio p) {
 		mapa = m;
-		celda = c;
+		x = a; 
+		y = b;
 		premio = p;
 	}
 	
@@ -28,8 +30,8 @@ public abstract class Enemigo extends Personaje {
 	
 	public void Avanzar() {
 		
-		if ( mapa.PuedoAvanzar(celda.getX(), celda.getY()) ) {
-			mapa.Avanzar(celda.getX(), celda.getY());
+		if ( mapa.PuedoAvanzar(x, y) ) {
+			mapa.Avanzar(x, y);
 		}
 	}
 }

@@ -9,8 +9,8 @@ public class Horda {
 	
 	public Horda(int q, Mapa m) {
 		for(int i = 0; i < q; i++) {
-			Celda c = new Celda(10, 1);
-			Enemigo e = new Enemigo1(c, m);
+			Celda c = new Celda(10, i);
+			Enemigo e = new Enemigo1(10, i, m);
 			c.SetObjetoActual(e);
 			
 			m.AgregarEnemigo();

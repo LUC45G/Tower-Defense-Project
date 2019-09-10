@@ -121,7 +121,24 @@ public class Gui {
 		
 	}
 	
-	public void AgregarEnemigo(int y) {
+	public void ActualizarGrafica() {
+		Image[][] matrizDeImagenes = nivel.GetImagenes();
+		JLabel lbl;
+		for (int i  = 0; i < 10; i++) {
+			for (int j = 0; j < 6; j++) {
+				lbl = labels.get(9*j + i );
+				
+				if( matrizDeImagenes[i][j] != null) {
+					lbl.setIcon( new ImageIcon(matrizDeImagenes[i][j]) );
+					System.out.println("HayAlgo");
+				}
+				else 
+					lbl.setText("");
+			}
+		}
+	}
+	
+	private void AgregarEnemigo(int y) {
 		Image enemyIcon = null;
 		
 		try {
