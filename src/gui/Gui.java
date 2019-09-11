@@ -24,7 +24,7 @@ public class Gui {
 	private JPanel panelMapa;
 	private Image currentCharacter;
 	private Nivel nivel;
-	private ArrayList<JLabel> labels;
+	private JLabel[][] labels;
 
 	/**
 	 * Launch the application.
@@ -56,7 +56,7 @@ public class Gui {
 		
 		nivel = new Nivel( new Mapa(this) );
 		nivel.start();
-		labels = new ArrayList<JLabel>();
+		labels = new JLabel[10][6];
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
@@ -89,32 +89,41 @@ public class Gui {
 		panelMapa.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMapa.setBounds(82, 0, 692, 551);
 		panelMapa.setLayout(new GridLayout(6, 10, 0, 0));
-		agregarBotones();
+		PintarMapaVacio();
 		frame.getContentPane().add(panelMapa);
 		
 		currentCharacter = null;
 	}
 	
 	@SuppressWarnings("serial")
-	private void agregarBotones() {
-		for(int i = 1; i <= 6; i++) {
-			for (int j = 1; j<=10; j++) {
+	private void PintarMapaVacio() {
+		for(int i = 0; i < 6; i++) {
+			for (int j = 0; j<10; j++) {
+				
+				int auxI = i;
+				int auxJ = j;
+				
 				MyLabel lbl = new MyLabel("lbl"+j+","+i);
 				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
+				
 				lbl.addActionListener( new AbstractAction("btn"+j+i) {
 				    public void actionPerformed(ActionEvent e) {
+				    	
+				    	
 				    	System.out.println("Clicked " + lbl.getText());
-				        if(currentCharacter!=null) {
+				        
+				    	if(currentCharacter!=null) {
+				    		nivel.CrearAliado(currentCharacter, auxJ, auxI);
 				        	if(lbl.getIcon() == null) {
-					        	lbl.setText("");
 					        	lbl.setIcon( new ImageIcon(currentCharacter));
 					        	currentCharacter=null;
-				        	}
-				        }
-				    }
+					        	}
+					        }
+					    }
+				    
 				});
 				
-				labels.add(lbl);
+				labels[j][i] = lbl;
 				panelMapa.add( lbl );
 			}
 		}
@@ -126,19 +135,21 @@ public class Gui {
 		JLabel lbl;
 		for (int i  = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				lbl = labels.get(9*j + i );
+				lbl = labels[i][j];
 				
 				if( matrizDeImagenes[i][j] != null) {
 					lbl.setIcon( new ImageIcon(matrizDeImagenes[i][j]) );
 					System.out.println("HayAlgo");
 				}
-				else 
-					lbl.setText("");
+				else {
+					lbl.setIcon(null);
+					lbl.revalidate();
+				}
 			}
 		}
 	}
 	
-	private void AgregarEnemigo(int y) {
+	/* private void AgregarEnemigo(int y) {
 		Image enemyIcon = null;
 		
 		try {
@@ -153,7 +164,7 @@ public class Gui {
 			lbl.setIcon( new ImageIcon(enemyIcon) );
 	}
 	
-	public void AvanzarEnemigos() {
+	private void AvanzarEnemigos() {
 		for(int i = 0; i < 60; i++) {
 			JLabel prevlbl = labels.get(i);
 			
@@ -168,7 +179,7 @@ public class Gui {
 				prevlbl.setIcon(null);
 			}
 		}
-	}
+	} */
 	
 	private class btn1AL implements ActionListener {
 		@Override

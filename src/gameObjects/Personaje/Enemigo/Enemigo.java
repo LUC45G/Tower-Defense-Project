@@ -31,7 +31,9 @@ public abstract class Enemigo extends Personaje {
 	public void Avanzar() {
 		
 		if ( mapa.PuedoAvanzar(x, y) ) {
+			System.out.println("x: "+ x+ " y: " + y);
 			mapa.Avanzar(x, y);
+			x--;
 		}
 	}
 }

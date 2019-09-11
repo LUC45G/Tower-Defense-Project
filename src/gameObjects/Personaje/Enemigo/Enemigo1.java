@@ -18,7 +18,7 @@ public class Enemigo1 extends Enemigo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(img);
+		
 	}
 
 	@Override

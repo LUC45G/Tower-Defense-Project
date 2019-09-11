@@ -4,8 +4,8 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import gameObjects.ObjetoDelMapa.*;
-import gameObjects.Personaje.Enemigo.Enemigo;
-import gameObjects.Personaje.Enemigo.Enemigo1;
+import gameObjects.Personaje.Enemigo.*;
+import gameObjects.Personaje.Aliado.*;
 
 public class Nivel extends Thread {
 	
@@ -48,6 +48,15 @@ public class Nivel extends Thread {
 		
 		for(int i = 0; i < listaDeEnemigos.size(); i++)
 			System.out.println(listaDeEnemigos.get(i).toString());
+	}
+	
+	public Image CrearAliado(Image i, int x, int y) {
+		Celda c = mapa.AgregarAliado(x, y);
+		Aliado a = new Aliado1();
+		
+		mapa.setObjetoEnCelda(x, y, a);
+		
+		return i;
 	}
 	
 	public Image[][] GetImagenes(){

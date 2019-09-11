@@ -24,6 +24,7 @@ public class Celda {
 	public ObjetoDelJuego getObjetoActual() { return objetoActual; }
 	public boolean estaDisponible() { return objetoActual == null; }
 	public Image getImagen() {
+		System.out.println("Disponible: " + objetoActual);
 		if(objetoActual == null) 
 			return img;
 		else 

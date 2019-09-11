@@ -60,6 +60,13 @@ public class Mapa {
 		return c;
 	}
 	
+	public Celda AgregarAliado(int x, int y) {
+		Celda c = new Celda(x, y);
+		gui.ActualizarGrafica();
+		return c;
+		
+	}
+	
 	public void setObjetoEnCelda(int x, int y, ObjetoDelJuego e) {
 		MAPA[x][y].SetObjetoActual(e);
 	}
