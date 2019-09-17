@@ -14,7 +14,7 @@ public class Enemigo1 extends Enemigo {
 		super(a, b, m);
 		
 		try {
-			img = ImageIO.read(getClass().getResource("/images/p1.png"));
+			img = ImageIO.read(getClass().getResource("/images/s.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

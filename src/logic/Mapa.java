@@ -55,7 +55,7 @@ public class Mapa {
 	public Celda AgregarEnemigo() {
 		Random r = new Random();
 		int y = r.nextInt(6);
-		Celda c = new Celda(9, ++y);
+		Celda c = new Celda(9, y);
 		gui.ActualizarGrafica();
 		return c;
 	}
