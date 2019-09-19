@@ -1,7 +1,7 @@
 package gameObjects.Personaje;
 
 import gameObjects.ObjetoDelJuego;
-import ;
+import Visitor.*;
 public abstract class Personaje extends ObjetoDelJuego {
 	protected int vida;
 	protected int damage;
@@ -9,5 +9,7 @@ public abstract class Personaje extends ObjetoDelJuego {
 	protected Visitor proyectil;
 	
 	public abstract void atacar();
-	public abstract void recibirAtaque();
+	public void recibirAtaque() {
+		vida--;
+	};
 }
