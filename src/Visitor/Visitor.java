@@ -1,4 +1,4 @@
-package gameObjects.Personaje;
+package Visitor;
 import gameObjects.Personaje.Aliado.Aliado;
 import gameObjects.Personaje.Enemigo.Enemigo;
 
