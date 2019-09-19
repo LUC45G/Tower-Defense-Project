@@ -19,7 +19,7 @@ public class VisitorEnemigo extends Visitor {
 
 	@Override
 	public void visitarObjetoConVida(ConVida cv) {
-		// TODO Auto-generated method stub
+		cv.recibirAtaque();
 	}
 
 	public void visitarObstaculo(Obstaculo obs) {

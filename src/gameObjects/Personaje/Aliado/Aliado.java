@@ -10,7 +10,6 @@ public abstract class Aliado extends Personaje {
 	
 	public void aceptar(Visitor v) {
 		v.visitarAliado(this);
-
 	}
 
 
