@@ -1,6 +1,7 @@
 package gameObjects.Personaje.Enemigo;
 import gameObjects.Item.Premio.Premio;
 import gameObjects.Personaje.Personaje;
+import gameObjects.Personaje.Visitor;
 import logic.Celda;
 import logic.Mapa;
 
@@ -27,7 +28,9 @@ public abstract class Enemigo extends Personaje {
 	/* Consultas */
 	
 	/* Comandos */
-	
+	public void aceptar(Visitor v) {
+		v.visitarEnemigo(this);
+	}
 	public void Avanzar() {
 		
 		if ( mapa.PuedoAvanzar(x, y) ) {
@@ -35,5 +38,9 @@ public abstract class Enemigo extends Personaje {
 			mapa.Avanzar(x, y);
 			x--;
 		}
+	}
+
+	public void recibirAtaque() {
+		return;
 	}
 }
