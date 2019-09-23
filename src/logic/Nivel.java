@@ -46,8 +46,6 @@ public class Nivel extends Thread {
 		listaDeEnemigos.add(e);
 		mapa.setObjetoEnCelda(c.getX(), c.getY(), e);
 		
-		for(int i = 0; i < listaDeEnemigos.size(); i++)
-			System.out.println(listaDeEnemigos.get(i).toString());
 	}
 	
 	public Image CrearAliado(Image i, int x, int y) {

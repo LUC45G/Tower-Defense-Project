@@ -20,11 +20,14 @@ public class Celda {
 	/* Consultas */
 	
 	public int getX() { return x; }
+	
 	public int getY() { return y; }
+	
 	public ObjetoDelJuego getObjetoActual() { return objetoActual; }
+	
 	public boolean estaDisponible() { return objetoActual == null; }
+	
 	public Image getImagen() {
-		System.out.println("Disponible: " + objetoActual);
 		if(objetoActual == null) 
 			return img;
 		else 
@@ -33,6 +36,7 @@ public class Celda {
 	
 	/* Comandos */
 	public void SetObjetoActual(ObjetoDelJuego j) { objetoActual = j; }
+	
 	public void EliminarObjetoActual() { objetoActual = null; }
 	
 	
