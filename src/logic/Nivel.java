@@ -3,9 +3,12 @@ package logic;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import gameObjects.ObjetoDelMapa.*;
 import gameObjects.Personaje.Enemigo.*;
 import gameObjects.Personaje.Aliado.*;
+import gameObjects.ObjetoDelJuego;
 
 public class Nivel extends Thread {
 	
@@ -41,29 +44,31 @@ public class Nivel extends Thread {
 	 */
 	public void HordaHardcodeada() {
 		
-		Celda c = mapa.AgregarEnemigo();
+		ObjetoDelJuego c = mapa.AgregarEnemigo();
 		Enemigo e = new Enemigo1(c.getX(), c.getY(), mapa);
 		listaDeEnemigos.add(e);
-		mapa.setObjetoEnCelda(c.getX(), c.getY(), e);
+		mapa.setObjeto(c.getX(), c.getY(), e);
 		
 	}
 	
+	//El aliado sabe sus coordenadas x,y y conoce al mapa 
 	public Image CrearAliado(Image i, int x, int y) {
-		Celda c = mapa.AgregarAliado(x, y);
-		Aliado a = new Aliado1();
+		ObjetoDelJuego c = mapa.AgregarAliado(x, y);
+		Aliado a = new Aliado1(x,y,mapa);
 		
-		mapa.setObjetoEnCelda(x, y, a);
+		mapa.setObjeto(x, y, a);
 		
 		return i;
 	}
 	
-	public Image[][] GetImagenes(){
-		Image[][] arregloDeImagenes = new Image[10][6];
+	//Lo ideal sería que mapa.getImage() devuelva un JLabel con una imagen dentro
+	public JLabel[][] GetImagenes(){
+		JLabel[][] imagenes = new JLabel[10][6];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				arregloDeImagenes[i][j] = mapa.getImage(i, j); 
+				imagenes[i][j] = mapa.getImage(i, j); 
 			}
 		}
-		return arregloDeImagenes;
+		return imagenes;
 	}
 }

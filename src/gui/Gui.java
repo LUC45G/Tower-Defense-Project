@@ -18,6 +18,9 @@ import logic.Nivel;
 
 import java.awt.Color;
 
+import java.awt.Rectangle;
+import gui.*;
+
 public class Gui {
 
 	private JFrame frame;
@@ -67,7 +70,7 @@ public class Gui {
 		JPanel panelPersonajes = new JPanel();
 		panelPersonajes.setBounds(0, 0, 141, 318);
 		frame.getContentPane().add(panelPersonajes);
-		panelPersonajes.setLayout(new GridLayout(5, 1, 2, 2));
+		panelPersonajes.setLayout(null);
 		
 		JButton btnPersonaje1 = new JButton("Seleccionar aliado");
 		btnPersonaje1.addActionListener(new btn1AL()); 
@@ -89,7 +92,7 @@ public class Gui {
 		panelMapa = new JPanel();
 		panelMapa.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMapa.setBounds(192, 0, 692, 551);
-		panelMapa.setLayout(new GridLayout(6, 10, 0, 0));
+		panelMapa.setLayout(null);
 		PintarMapaVacio();
 		frame.getContentPane().add(panelMapa);
 		
@@ -101,6 +104,7 @@ public class Gui {
 		panelScore.add(lblScore);
 		
 		currentCharacter = null;
+		
 	}
 	
 	@SuppressWarnings("serial")
@@ -111,7 +115,7 @@ public class Gui {
 				int auxI = i;
 				int auxJ = j;
 				
-				MyLabel lbl = new MyLabel("lbl"+j+","+i);
+				MyLabel lbl = new MyLabel("lbl"+j+","+i);	//Estaba MyLabel
 				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
 				
 				lbl.addActionListener( new AbstractAction("btn"+j+i) {
@@ -137,14 +141,14 @@ public class Gui {
 	}
 	
 	public void ActualizarGrafica() {
-		Image[][] matrizDeImagenes = nivel.GetImagenes();
+		JLabel[][] matrizDeImagenes = nivel.GetImagenes();
 		JLabel lbl;
 		for (int i  = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
 				lbl = labels[i][j];
-				
 				if( matrizDeImagenes[i][j] != null) {
-					lbl.setIcon( new ImageIcon(matrizDeImagenes[i][j]) );
+					//Setearle la imagen como icono al JLabel
+					//lbl.setIcon( new ImageIcon(matrizDeImagenes[i][j]) );
 				}
 				else {
 					lbl.setIcon(null);
@@ -152,6 +156,28 @@ public class Gui {
 				}
 			}
 		}
+	}
+	
+	public void ActualizarGrafica2() {
+		JLabel[][] imagenes = nivel.GetImagenes();
+		Rectangle pos;
+		JLabel dibujo;
+		for (int i  = 0; i < 10; i++) {
+			for (int j = 0; j < 6; j++) {
+				dibujo = imagenes[i][j];
+				if( dibujo != null) {
+					pos = dibujo.getBounds();
+					int newX = (int) pos.getX() - 10; //ver que numero restar
+					int newY = (int) pos.getY();
+					int ancho = (int) pos.getWidth();
+					int alto = (int) pos.getHeight();
+					
+					dibujo.setBounds(newX, newY, ancho, alto);
+				}
+				
+			}
+		}		
+		
 	}
 	
 	private class btn1AL implements ActionListener {

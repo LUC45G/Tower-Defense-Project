@@ -8,20 +8,19 @@ import Visitor.*;
 public abstract class Enemigo extends Personaje {
 
 	protected Premio premio;
-	protected Mapa mapa;
-	protected int x, y;
+	
 	
 	/* Constructor */
-	public Enemigo(int a, int b, Mapa m) {
+	public Enemigo(int xx, int yy, Mapa m) {
 		mapa = m;
-		x = a; 
-		y = b;
+		x = xx; 
+		y = yy;
 	}
 	
-	public Enemigo(int a, int b, Mapa m, Premio p) {
+	public Enemigo(int xx, int yy, Mapa m, Premio p) {
 		mapa = m;
-		x = a; 
-		y = b;
+		x = xx; 
+		y = yy;
 		premio = p;
 	}
 	

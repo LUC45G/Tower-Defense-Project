@@ -2,15 +2,19 @@ package gameObjects.Personaje.Aliado;
 
 import java.io.IOException;
 
+
 import javax.imageio.ImageIO;
 
 import gameObjects.Personaje.Rango;
+
+import logic.Mapa; 
 
 public class Aliado1 extends Aliado{
 	
 	/* Constructor */
 
-	public Aliado1() {
+	public Aliado1(int x, int y, Mapa m) {
+		super(x,y,m);
 		vida = 100;
 		damage = 1;
 		costo = 750500;
