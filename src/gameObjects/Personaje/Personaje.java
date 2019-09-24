@@ -12,4 +12,7 @@ public abstract class Personaje extends ObjetoDelJuego {
 	public void recibirAtaque() {
 		vida--;
 	};
+	public void eliminar() {
+		// Elimina al personaje del mapa
+	}
 }

@@ -1,11 +1,7 @@
 package gameObjects.Personaje.Enemigo;
 
-import java.awt.Image;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
-import logic.Celda;
 import logic.Mapa;
 
 public class Enemigo1 extends Enemigo {
@@ -25,6 +21,13 @@ public class Enemigo1 extends Enemigo {
 	public void atacar() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void eliminar() {
+		super.eliminar();
+		// Delega a Personaje que lo elimine del mapa,
+		// despues calcula si tiene que dropear item, oro o lo que sea
 	}
 
 	
