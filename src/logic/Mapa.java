@@ -73,18 +73,16 @@ public class Mapa {
 		MAPA[x][y] = e;
 	}
 	
+	public void limparObjeto(int x, int y) {
+		MAPA[x][y] = null;
+	}
+	
 	//En vez de retornar una Image retorna un JLabel con la imagen dentro
-	public Image getImage(int x, int y) {
+	public JLabel getImage(int x, int y) {
 		if (MAPA[x][y] != null) {
-<<<<<<< HEAD
-			return MAPA[x][y].getImagen();
+			return new JLabel( new ImageIcon( MAPA[x][y].getImagen() ) );
 		}
 		return null;
-=======
-			return new JLabel( new ImageIcon( MAPA[x][y].getImagen() ) );
-		} else 
-			return null;
->>>>>>> 71d946fdd655e0031f7bdb10f56970eb1f2c97e8
 	}
 	
 	/*public void AvanzarEnemigos() {
