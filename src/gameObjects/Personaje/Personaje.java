@@ -1,6 +1,7 @@
 package gameObjects.Personaje;
 
 import gameObjects.ObjetoDelJuego;
+import Observer.IObserver;
 import Visitor.*;
 public abstract class Personaje extends ObjetoDelJuego {
 	protected int vida;
@@ -9,10 +10,16 @@ public abstract class Personaje extends ObjetoDelJuego {
 	protected VisitorDisparo proyectil;
 	
 	public abstract void atacar();
+	
 	public void recibirAtaque() {
 		vida--;
-	};
+	}
+	
 	public void eliminar() {
 		// Elimina al personaje del mapa
+	}
+	
+	public ObjetoDelJuego[][] getMapa() {
+		return mapa.getMapa();
 	}
 }

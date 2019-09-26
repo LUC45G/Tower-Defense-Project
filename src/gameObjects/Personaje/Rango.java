@@ -1,7 +1,11 @@
 package gameObjects.Personaje;
 
+import java.util.ArrayList;
+
 import Observer.IObserver;
 import Visitor.VisitorDisparo;
+import gameObjects.ObjetoDelJuego;
+import logic.Mapa;
 /**
  * 
  * @author matia
@@ -9,17 +13,26 @@ import Visitor.VisitorDisparo;
  */
 public class Rango implements IObserver{
 	
-	//public rectangulo [] alcance;
-	public VisitorDisparo tiro;
-	public Personaje miPersonaje; //es muy trucho esto?
+	protected int vision;
+	protected ArrayList<ObjetoDelJuego> alcance;
+	protected VisitorDisparo tiro;
+	protected Personaje miPersonaje; //es muy trucho esto?
+	private ObjetoDelJuego[][] m;
 	/**
 	 * Constructor con un visitador de disparo (creo) y un personaje que contenga al rango
 	 * @param proyectil visitador que va a "recorrer" el alcance
 	 * @param per 	Personaje dueño del rango
 	 */
-	public Rango(VisitorDisparo proyectil, Personaje per) {
+	public Rango(VisitorDisparo proyectil, Personaje per, int vision) {
 		tiro=proyectil;
 		miPersonaje=per;
+		//consigo el mapa
+		m=miPersonaje.getMapa();
+		int x=miPersonaje.getX();
+		int y=miPersonaje.getY();
+		for(int i=0; i <= vision; i++) {
+			
+		}
 		//agregar la creacion del alcance
 	}
 	
