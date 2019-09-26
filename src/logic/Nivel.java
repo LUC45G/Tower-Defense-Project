@@ -35,6 +35,11 @@ public class Nivel extends Thread {
 				e.printStackTrace();
 			}
 			
+			if(listaDeEnemigos.size() == 0) {
+				System.out.println("No hay enemigos");
+				mapa.Update();
+				continue;
+			}
 			for(int i = 0; i < listaDeEnemigos.size(); i++) 
 				listaDeEnemigos.get(i).Avanzar();
 		}

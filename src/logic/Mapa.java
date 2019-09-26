@@ -5,9 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import gameObjects.ObjetoDelJuego;
 import gameObjects.Personaje.Enemigo.Enemigo1;
-import gui.Gui;
+import Grafica.Gui;
 import gameObjects.Personaje.Aliado.*;
-import javax.swing.JLabel;
 
 public class Mapa {
 	/* El mapa tiene que tener un Singleton, es decir, solo una instancia de mapa a la vez */
@@ -67,6 +66,10 @@ public class Mapa {
 		gui.ActualizarGrafica();
 		return a;
 		
+	}
+	
+	public void Update() {
+		gui.ActualizarGrafica();
 	}
 	
 	public void setObjeto(int x, int y, ObjetoDelJuego e) {

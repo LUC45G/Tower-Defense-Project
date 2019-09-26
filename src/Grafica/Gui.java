@@ -1,4 +1,4 @@
-package gui;
+package Grafica;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -184,7 +184,6 @@ public class Gui {
 			}
 		}
 		panelMapa.repaint();
-		frame.repaint();
 		
 	}
 	
@@ -195,7 +194,6 @@ public class Gui {
 			try {
 				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
 				panelMapa.repaint();
-				frame.repaint();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -210,7 +208,6 @@ public class Gui {
 			nivel.HordaHardcodeada();
 			
 			panelMapa.repaint();
-			frame.repaint();
 			
 		}
 	}
@@ -220,6 +217,7 @@ public class Gui {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			nivel.EliminarTodosLosEnemigos();
+			panelMapa.repaint();
 		}
 	}
 }

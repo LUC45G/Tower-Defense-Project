@@ -18,7 +18,7 @@ public class Aliado1 extends Aliado{
 		vida = 100;
 		damage = 1;
 		costo = 750500;
-		rango=new Rango(proyectil,this);
+		rango=new Rango(proyectil,this,1);
 		
 		try {
 			img = ImageIO.read(getClass().getResource("/images/p1.png"));
@@ -29,6 +29,12 @@ public class Aliado1 extends Aliado{
 	}
 	
 	public void atacar() {
+		
+	}
+
+	@Override
+	public void notificar() {
+		// TODO Auto-generated method stub
 		
 	}
 	
