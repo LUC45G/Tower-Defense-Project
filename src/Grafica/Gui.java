@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import gameObjects.ObjetoDelJuego;
+import gameObjects.Personaje.Enemigo.Enemigo;
 import logic.Mapa;
 import logic.Nivel;
 
@@ -92,7 +96,6 @@ public class Gui {
 		panelMapa.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMapa.setBounds(192, 0, 692, 551);
 		panelMapa.setLayout(null);
-		// PintarMapaVacio();
 		frame.getContentPane().add(panelMapa);
 		
 		JPanel panelScore = new JPanel();
@@ -139,52 +142,21 @@ public class Gui {
 		
 	}
 	
-	/*public void ActualizarGrafica() {
-		JLabel[][] matrizDeImagenes = nivel.GetImagenes();
-		JLabel lbl;
-		for (int i  = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				lbl = labels[i][j];
-				if( matrizDeImagenes[i][j] != null) {
-					//Setearle la imagen como icono al JLabel
-					//lbl.setIcon( new ImageIcon(matrizDeImagenes[i][j]) );
-				}
-				else {
-					lbl.setIcon(null);
-					lbl.revalidate();
-				}
-			}
-		}
-	}*/
 	
 	public void ActualizarGrafica() {
-		JLabel[][] imagenes = nivel.GetImagenes();
-		Rectangle pos;
 		int current = 1;
 		JLabel dibujo;
-		for (int i  = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				dibujo = imagenes[i][j];
-				if( dibujo != null) {
+		for (ObjetoDelJuego pos: nivel.getObjetosDelMapa()) {
+				if( pos != null) {
+					dibujo = new JLabel();
 					System.out.println("Hay " + current++ + " dibujo/s");
-					pos = dibujo.getBounds();
-					int newX = (int) pos.getX() - 10; //ver que numero restar
-					int newY = (int) pos.getY();
-					int ancho = 100;//(int) pos.getWidth();
-					int alto = 100;//(int) pos.getHeight();
-					// Este movimiento tiene que estar en la logica
-					// La grafica solo debe pedir las coordenadas y pintar
-					
-					dibujo.setBounds(newX, newY, ancho, alto);
+					dibujo.setBounds(pos.getHitBox());
+					dibujo.setIcon(new ImageIcon(pos.getImagen()));
 					panelMapa.add(dibujo);
-					
 					System.out.println(dibujo.getBounds().toString());
-				}
-				
+				}	
 			}
-		}
 		panelMapa.repaint();
-		
 	}
 	
 	private class btn1AL implements ActionListener {
@@ -193,7 +165,7 @@ public class Gui {
 			
 			try {
 				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
-				panelMapa.repaint();
+				panelMapa.addMouseListener(new Clic());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -206,7 +178,11 @@ public class Gui {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			nivel.HordaHardcodeada();
-			
+			Enemigo e=nivel.CrearEnemigo();
+			JLabel dib=new JLabel();
+			dib.setBounds(e.getHitBox());
+			dib.setIcon(new ImageIcon(e.getImagen()));
+			panelMapa.add(dib);
 			panelMapa.repaint();
 			
 		}
@@ -216,8 +192,47 @@ public class Gui {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			nivel.EliminarTodosLosEnemigos();
+			nivel.Eliminar(ObjetoDelJuego o);
 			panelMapa.repaint();
+		}
+	}
+	private class Clic implements MouseListener {
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			try {
+				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
+				nivel.CrearAliado(currentCharacter, e.getX(), e.getY());
+				panelMapa.repaint();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }

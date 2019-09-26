@@ -32,11 +32,6 @@ public class Aliado1 extends Aliado{
 		
 	}
 
-	@Override
-	public void notificar() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 }

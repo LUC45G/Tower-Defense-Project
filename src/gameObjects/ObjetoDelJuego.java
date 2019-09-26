@@ -1,6 +1,7 @@
 package gameObjects;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -45,5 +46,10 @@ public abstract class ObjetoDelJuego implements IObserved{
 
 	public int getY() {
 		return y;
+	}
+	//devuelve el rectangulo
+	public Rectangle getHitBox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
