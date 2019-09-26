@@ -68,14 +68,14 @@ public class Gui {
 		JPanel panelPersonajes = new JPanel();
 		panelPersonajes.setBounds(0, 0, 141, 318);
 		frame.getContentPane().add(panelPersonajes);
-		panelPersonajes.setLayout(null);
 		
 		JButton btnPersonaje1 = new JButton("Seleccionar aliado");
 		btnPersonaje1.addActionListener(new btn1AL()); 
+		panelPersonajes.setLayout(new GridLayout(0, 1, 0, 0));
 		panelPersonajes.add(btnPersonaje1);
 		
 		JButton btnPersonaje2 = new JButton("Spawnear enemigo");
-		btnPersonaje2.addActionListener(new btn2AL()); // ActionListener temporal para probar al enemigo
+		btnPersonaje2.addActionListener(new btn2AL());
 		panelPersonajes.add(btnPersonaje2);
 		
 		JButton btnPersonaje3 = new JButton("Eliminar enemigo");
@@ -138,7 +138,12 @@ public class Gui {
 		
 	}
 	
+<<<<<<< HEAD
 	/*public void ActualizarGrafica() {
+=======
+	/*
+	public void ActualizarGrafica() {
+>>>>>>> 71d946fdd655e0031f7bdb10f56970eb1f2c97e8
 		JLabel[][] matrizDeImagenes = nivel.GetImagenes();
 		JLabel lbl;
 		for (int i  = 0; i < 10; i++) {
@@ -154,9 +159,16 @@ public class Gui {
 				}
 			}
 		}
+<<<<<<< HEAD
 	}*/
 	
 	public void ActualizarGrafica2() {//Se podría hacer que solo se muevan los Rectangle que contienen enemigos
+=======
+	}
+	 * */
+	
+	public void ActualizarGrafica() {
+>>>>>>> 71d946fdd655e0031f7bdb10f56970eb1f2c97e8
 		JLabel[][] imagenes = nivel.GetImagenes();
 		Rectangle pos;
 		JLabel dibujo;
@@ -174,7 +186,9 @@ public class Gui {
 				}
 				
 			}
-		}		
+		}
+		panelMapa.repaint();
+		frame.repaint();
 		
 	}
 	
@@ -183,7 +197,7 @@ public class Gui {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			try {
-				currentCharacter = ImageIO.read(getClass().getResource("/images/p1.png"));
+				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
 				panelMapa.repaint();
 				frame.repaint();
 			} catch (IOException e) {
