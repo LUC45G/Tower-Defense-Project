@@ -19,8 +19,6 @@ import logic.Nivel;
 import java.awt.Color;
 
 import java.awt.Rectangle;
-import gui.*;
-
 public class Gui {
 
 	private JFrame frame;
@@ -115,7 +113,7 @@ public class Gui {
 				int auxI = i;
 				int auxJ = j;
 				
-				MyLabel lbl = new MyLabel("lbl"+j+","+i);	//Estaba MyLabel
+				MyLabel lbl = new MyLabel("lbl"+j+","+i);
 				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
 				
 				lbl.addActionListener( new AbstractAction("btn"+j+i) {
@@ -140,7 +138,7 @@ public class Gui {
 		
 	}
 	
-	public void ActualizarGrafica() {
+	/*public void ActualizarGrafica() {
 		JLabel[][] matrizDeImagenes = nivel.GetImagenes();
 		JLabel lbl;
 		for (int i  = 0; i < 10; i++) {
@@ -156,9 +154,9 @@ public class Gui {
 				}
 			}
 		}
-	}
+	}*/
 	
-	public void ActualizarGrafica2() {
+	public void ActualizarGrafica2() {//Se podría hacer que solo se muevan los Rectangle que contienen enemigos
 		JLabel[][] imagenes = nivel.GetImagenes();
 		Rectangle pos;
 		JLabel dibujo;

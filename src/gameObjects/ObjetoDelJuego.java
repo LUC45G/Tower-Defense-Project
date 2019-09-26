@@ -11,9 +11,11 @@ public abstract class ObjetoDelJuego {
 	protected Image img;
 	protected int x, y;
 	protected Mapa mapa;
+
 	
 	public void aceptar(Visitor v) {} //Is this right??
-	public Image getImagen() { 
+	
+	public Image getImagen() {//habria que ver != null 
 		return img; 
 	}
 	

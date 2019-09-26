@@ -9,6 +9,8 @@ import gameObjects.ObjetoDelMapa.*;
 import gameObjects.Personaje.Enemigo.*;
 import gameObjects.Personaje.Aliado.*;
 import gameObjects.ObjetoDelJuego;
+import javax.swing.ImageIcon;
+
 
 public class Nivel extends Thread {
 	
@@ -66,7 +68,8 @@ public class Nivel extends Thread {
 		JLabel[][] imagenes = new JLabel[10][6];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				imagenes[i][j] = mapa.getImage(i, j); 
+				ImageIcon imagenActual = new ImageIcon(mapa.getImage(i, j));
+				imagenes[i][j].setIcon(imagenActual); //getImage puede retornar null
 			}
 		}
 		return imagenes;

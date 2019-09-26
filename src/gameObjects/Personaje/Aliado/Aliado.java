@@ -13,6 +13,7 @@ public abstract class Aliado extends Personaje {
 		mapa = m;
 		x = xx; 
 		y = yy;
+		img = null;
 	}
 	
 	public void aceptar(Visitor v) {
