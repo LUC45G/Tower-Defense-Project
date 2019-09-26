@@ -17,7 +17,8 @@ public abstract class ObjetoDelJuego implements IObserved{
 	protected Mapa mapa;
 	protected ArrayList<IObserver> observadores = new ArrayList<IObserver>();
 	public void aceptar(Visitor v) {} //Is this right??
-	public Image getImagen() { 
+	
+	public Image getImagen() {//habria que ver != null 
 		return img; 
 	}
 	public void agregarObservador(IObserver obs) {

@@ -19,8 +19,6 @@ import logic.Nivel;
 import java.awt.Color;
 
 import java.awt.Rectangle;
-import gui.*;
-
 public class Gui {
 
 	private JFrame frame;
@@ -70,17 +68,18 @@ public class Gui {
 		JPanel panelPersonajes = new JPanel();
 		panelPersonajes.setBounds(0, 0, 141, 318);
 		frame.getContentPane().add(panelPersonajes);
-		panelPersonajes.setLayout(null);
 		
 		JButton btnPersonaje1 = new JButton("Seleccionar aliado");
 		btnPersonaje1.addActionListener(new btn1AL()); 
+		panelPersonajes.setLayout(new GridLayout(0, 1, 0, 0));
 		panelPersonajes.add(btnPersonaje1);
 		
 		JButton btnPersonaje2 = new JButton("Spawnear enemigo");
-		btnPersonaje2.addActionListener(new btn2AL()); // ActionListener temporal para probar al enemigo
+		btnPersonaje2.addActionListener(new btn2AL());
 		panelPersonajes.add(btnPersonaje2);
 		
 		JButton btnPersonaje3 = new JButton("Eliminar enemigo");
+		btnPersonaje3.addActionListener(new btn3AL());
 		panelPersonajes.add(btnPersonaje3);
 		
 		JButton btnPersonaje4 = new JButton("4");
@@ -93,7 +92,7 @@ public class Gui {
 		panelMapa.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMapa.setBounds(192, 0, 692, 551);
 		panelMapa.setLayout(null);
-		PintarMapaVacio();
+		// PintarMapaVacio();
 		frame.getContentPane().add(panelMapa);
 		
 		JPanel panelScore = new JPanel();
@@ -115,7 +114,7 @@ public class Gui {
 				int auxI = i;
 				int auxJ = j;
 				
-				MyLabel lbl = new MyLabel("lbl"+j+","+i);	//Estaba MyLabel
+				MyLabel lbl = new MyLabel("lbl"+j+","+i);
 				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
 				
 				lbl.addActionListener( new AbstractAction("btn"+j+i) {
@@ -140,7 +139,7 @@ public class Gui {
 		
 	}
 	
-	public void ActualizarGrafica() {
+	/*public void ActualizarGrafica() {
 		JLabel[][] matrizDeImagenes = nivel.GetImagenes();
 		JLabel lbl;
 		for (int i  = 0; i < 10; i++) {
@@ -156,27 +155,36 @@ public class Gui {
 				}
 			}
 		}
-	}
+	}*/
 	
-	public void ActualizarGrafica2() {
+	public void ActualizarGrafica() {
 		JLabel[][] imagenes = nivel.GetImagenes();
 		Rectangle pos;
+		int current = 1;
 		JLabel dibujo;
 		for (int i  = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
 				dibujo = imagenes[i][j];
 				if( dibujo != null) {
+					System.out.println("Hay " + current++ + " dibujo/s");
 					pos = dibujo.getBounds();
 					int newX = (int) pos.getX() - 10; //ver que numero restar
 					int newY = (int) pos.getY();
-					int ancho = (int) pos.getWidth();
-					int alto = (int) pos.getHeight();
+					int ancho = 100;//(int) pos.getWidth();
+					int alto = 100;//(int) pos.getHeight();
+					// Este movimiento tiene que estar en la logica
+					// La grafica solo debe pedir las coordenadas y pintar
 					
 					dibujo.setBounds(newX, newY, ancho, alto);
+					panelMapa.add(dibujo);
+					
+					System.out.println(dibujo.getBounds().toString());
 				}
 				
 			}
-		}		
+		}
+		panelMapa.repaint();
+		frame.repaint();
 		
 	}
 	
@@ -185,7 +193,7 @@ public class Gui {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			try {
-				currentCharacter = ImageIO.read(getClass().getResource("/images/p1.png"));
+				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
 				panelMapa.repaint();
 				frame.repaint();
 			} catch (IOException e) {
@@ -204,6 +212,14 @@ public class Gui {
 			panelMapa.repaint();
 			frame.repaint();
 			
+		}
+	}
+	
+	private class btn3AL implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+			nivel.EliminarTodosLosEnemigos();
 		}
 	}
 }

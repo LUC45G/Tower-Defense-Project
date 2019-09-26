@@ -15,6 +15,7 @@ public abstract class Enemigo extends Personaje {
 		mapa = m;
 		x = xx; 
 		y = yy;
+		img = null;
 	}
 	
 	public Enemigo(int xx, int yy, Mapa m, Premio p) {

@@ -9,6 +9,8 @@ import gameObjects.ObjetoDelMapa.*;
 import gameObjects.Personaje.Enemigo.*;
 import gameObjects.Personaje.Aliado.*;
 import gameObjects.ObjetoDelJuego;
+import javax.swing.ImageIcon;
+
 
 public class Nivel extends Thread {
 	
@@ -28,7 +30,7 @@ public class Nivel extends Thread {
 	public void run() {
 		while(true){
 			try {
-				Thread.sleep(30);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -61,12 +63,19 @@ public class Nivel extends Thread {
 		return i;
 	}
 	
+	public void EliminarTodosLosEnemigos() {
+		for(int i = 0; i < listaDeEnemigos.size(); i++) { 
+			mapa.limparObjeto(listaDeEnemigos.get(i).getX(), listaDeEnemigos.get(i).getY());
+			listaDeEnemigos.remove(i);
+		}
+	}
+	
 	//Lo ideal sería que mapa.getImage() devuelva un JLabel con una imagen dentro
 	public JLabel[][] GetImagenes(){
 		JLabel[][] imagenes = new JLabel[10][6];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 6; j++) {
-				imagenes[i][j] = mapa.getImage(i, j); 
+				imagenes[i][j] = mapa.getImage(i, j); //getImage puede retornar null
 			}
 		}
 		return imagenes;

@@ -1,12 +1,13 @@
 package logic;
 
-import java.awt.Image;
 import java.util.Random;
-
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import gameObjects.ObjetoDelJuego;
 import gameObjects.Personaje.Enemigo.Enemigo1;
 import gui.Gui;
 import gameObjects.Personaje.Aliado.*;
+import javax.swing.JLabel;
 
 public class Mapa {
 	/* El mapa tiene que tener un Singleton, es decir, solo una instancia de mapa a la vez */
@@ -72,11 +73,16 @@ public class Mapa {
 		MAPA[x][y] = e;
 	}
 	
+	public void limparObjeto(int x, int y) {
+		MAPA[x][y] = null;
+	}
+	
 	//En vez de retornar una Image retorna un JLabel con la imagen dentro
 	public JLabel getImage(int x, int y) {
 		if (MAPA[x][y] != null) {
-			return MAPA[x][y].getImagen();
+			return new JLabel( new ImageIcon( MAPA[x][y].getImagen() ) );
 		}
+		return null;
 	}
 	
 	/*public void AvanzarEnemigos() {
