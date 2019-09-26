@@ -1,8 +1,8 @@
 package logic;
 
-import java.awt.Image;
 import java.util.Random;
-
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import gameObjects.ObjetoDelJuego;
 import gameObjects.Personaje.Enemigo.Enemigo1;
 import gui.Gui;
@@ -75,8 +75,9 @@ public class Mapa {
 	//En vez de retornar una Image retorna un JLabel con la imagen dentro
 	public JLabel getImage(int x, int y) {
 		if (MAPA[x][y] != null) {
-			return MAPA[x][y].getImagen();
-		}
+			return new JLabel( new ImageIcon( MAPA[x][y].getImagen() ) );
+		} else 
+			return null;
 	}
 	
 	/*public void AvanzarEnemigos() {
