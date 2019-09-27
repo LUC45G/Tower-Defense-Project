@@ -22,4 +22,5 @@ public abstract class Personaje extends ObjetoDelJuego {
 	public ObjetoDelJuego[][] getMapa() {
 		return mapa.getMapa();
 	}
+	public void notificar() {}
 }

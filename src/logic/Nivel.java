@@ -1,6 +1,7 @@
 package logic;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -84,5 +85,18 @@ public class Nivel extends Thread {
 			}
 		}
 		return imagenes;
+	}
+	/**
+	 * Metodo que devuelve un iterable con todos los objetos del mapa actuales
+	 * @return
+	 */
+	public Iterable<ObjetoDelJuego> getObjetosDelMapa() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Enemigo CrearEnemigo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
