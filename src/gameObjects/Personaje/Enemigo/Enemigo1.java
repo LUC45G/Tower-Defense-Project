@@ -1,5 +1,6 @@
 package gameObjects.Personaje.Enemigo;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import logic.Mapa;
@@ -14,7 +15,10 @@ public class Enemigo1 extends Enemigo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		int w = img.getWidth(null);
+		int h = img.getHeight(null);
+		//y fijo, altura fijo, anchura fijo, solo cammbia la coordenada x
+		rectangulo = new Rectangle (0,0,-w,-h);//x,y,widht,height
 	}
 
 	@Override

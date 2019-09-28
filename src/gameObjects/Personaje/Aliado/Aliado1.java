@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import gameObjects.Personaje.Rango;
 
 import logic.Mapa; 
-
+import java.awt.Rectangle;
 public class Aliado1 extends Aliado{
 	
 	/* Constructor */
@@ -25,7 +25,10 @@ public class Aliado1 extends Aliado{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		int w = img.getWidth(null);
+		int h = img.getHeight(null);
+		//y fijo, altura fijo, anchura fijo, solo cammbia la coordenada x
+		rectangulo = new Rectangle (0,0,-w,-h);//x,y,widht,height
 	}
 	
 	public void atacar() {

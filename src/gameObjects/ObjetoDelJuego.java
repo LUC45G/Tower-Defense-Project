@@ -9,11 +9,13 @@ import Observer.IObserved;
 import Observer.IObserver;
 import Visitor.Visitor;
 import logic.Mapa;
+import java.awt.Rectangle;
 
 public abstract class ObjetoDelJuego implements IObserved{
 	
 	//Como no hay celdas los objetos del juego deberían saber en que posición están
 	protected Image img;
+	protected Rectangle rectangulo;
 	protected int x, y;
 	protected Mapa mapa;
 	protected ArrayList<IObserver> observadores = new ArrayList<IObserver>();
