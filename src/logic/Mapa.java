@@ -1,5 +1,7 @@
 package logic;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,7 +14,7 @@ public class Mapa {
 	/* El mapa tiene que tener un Singleton, es decir, solo una instancia de mapa a la vez */
 	
 	
-	private static final ObjetoDelJuego [][] MAPA = new ObjetoDelJuego[10][6]; // 10x6 Minimo
+	private static final ArrayList<ObjetoDelJuego> gameObjects = new ArrayList<ObjetoDelJuego>();
 	private static Mapa INSTANCE = null; // se asegura de que haya un solo mapa
 	private Gui gui;
 	
@@ -28,31 +30,43 @@ public class Mapa {
 	
 	/* Consultas */
 	
+	/**
+	 * @return la instancia de mapa
+	 */
 	public Mapa getInstance() { return INSTANCE; }
 	
-	public ObjetoDelJuego[][] getMapa() { return MAPA; }
+	/**
+	 * @return una lista con todos los objetos del juego activos al momento
+	 */
+	public ArrayList<ObjetoDelJuego> getMapa() { return gameObjects; }
 	
-	public boolean PuedoAvanzar(int x, int y) {
+	/**
+	 * @param r el rectangulo del gameObject
+	 * @return si puede avanzar o no
+	 */
+	public boolean PuedoAvanzar(Rectangle r) {
 		// Verifica que la siguiente posición esté disponible
-		if(x!=0)
-			return MAPA[x-1][y] == null;
-		else 
-			return false;
+		
+		
+		return false;
 	}
 	
 	/* Comandos */
 	
-	public void Avanzar(int x, int y) {
+	/**
+	 * Avanza al personaje y actualiza la grafica
+	 * @param r la hitbox del personaje para poder moverlo
+	 */
+	public void Avanzar(Rectangle r) {
 		// Requiere que se haya verificado que puede avanzar
-		
-		ObjetoDelJuego aux = MAPA[x][y];
-		MAPA[x][y] = null;
-		MAPA[x-1][y] = aux;
-		
+		r.getBounds().x -= 7;
 		gui.ActualizarGrafica();
-		
 	}
 	
+	/**
+	 * Agrega un enemigo al final
+	 * @return
+	 */
 	public ObjetoDelJuego AgregarEnemigo() { //retorna el enemigo
 		Random r = new Random();
 		int y = r.nextInt(6);
@@ -72,25 +86,14 @@ public class Mapa {
 		gui.ActualizarGrafica();
 	}
 	
-	public void setObjeto(int x, int y, ObjetoDelJuego e) {
-		MAPA[x][y] = e;
-	}
+	
 	
 	public void limparObjeto(int x, int y) {
-		MAPA[x][y] = null;
+		
 	}
 	
 	//En vez de retornar una Image retorna un JLabel con la imagen dentro
-	public JLabel getImage(int x, int y) {
-		if (MAPA[x][y] != null) {
-			return new JLabel( new ImageIcon( MAPA[x][y].getImagen() ) );
-		}
+	public JLabel getImage() {
 		return null;
 	}
-	
-	/*public void AvanzarEnemigos() {
-		gui.AvanzarEnemigos();
-	}*/
-	
-
 }

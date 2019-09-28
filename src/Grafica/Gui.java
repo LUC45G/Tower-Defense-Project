@@ -192,7 +192,7 @@ public class Gui {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			nivel.Eliminar(ObjetoDelJuego o);
+			//nivel.Eliminar(ObjetoDelJuego o);
 			panelMapa.repaint();
 		}
 	}

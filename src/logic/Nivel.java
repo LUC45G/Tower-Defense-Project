@@ -25,7 +25,6 @@ public class Nivel extends Thread {
 	public Nivel(Mapa m) {
 		mapa = m;
 		listaDeEnemigos = new ArrayList<Enemigo>();
-		
 	}
 	
 	public void run() {
@@ -55,7 +54,8 @@ public class Nivel extends Thread {
 		ObjetoDelJuego c = mapa.AgregarEnemigo();
 		Enemigo e = new Enemigo1(c.getX(), c.getY(), mapa);
 		listaDeEnemigos.add(e);
-		mapa.setObjeto(c.getX(), c.getY(), e);
+
+		// Agregar enemigo al mapa TODO
 		
 	}
 	
@@ -64,7 +64,7 @@ public class Nivel extends Thread {
 		ObjetoDelJuego c = mapa.AgregarAliado(x, y);
 		Aliado a = new Aliado1(x,y,mapa);
 		
-		mapa.setObjeto(x, y, a);
+		// Agregar aliado al mapa TODO
 		
 		return i;
 	}
@@ -76,27 +76,15 @@ public class Nivel extends Thread {
 		}
 	}
 	
-	//Lo ideal sería que mapa.getImage() devuelva un JLabel con una imagen dentro
-	public JLabel[][] GetImagenes(){
-		JLabel[][] imagenes = new JLabel[10][6];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 6; j++) {
-				imagenes[i][j] = mapa.getImage(i, j); //getImage puede retornar null
-			}
-		}
-		return imagenes;
-	}
 	/**
 	 * Metodo que devuelve un iterable con todos los objetos del mapa actuales
 	 * @return
 	 */
 	public Iterable<ObjetoDelJuego> getObjetosDelMapa() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapa.getMapa();
 	}
 
 	public Enemigo CrearEnemigo() {
-		// TODO Auto-generated method stub
-		return null;
+		return (Enemigo) mapa.AgregarEnemigo();
 	}
 }

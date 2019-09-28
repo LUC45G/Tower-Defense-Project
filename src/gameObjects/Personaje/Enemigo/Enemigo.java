@@ -33,11 +33,12 @@ public abstract class Enemigo extends Personaje {
 	}
 	
 	public void Avanzar() {
-		
+		/*
 		if ( mapa.PuedoAvanzar(x, y) ) {
 			mapa.Avanzar(x, y);
 			x--;
 		}
+		 * */
 	}
 
 	public void recibirAtaque() {
