@@ -45,10 +45,8 @@ public class Mapa {
 	 * @return si puede avanzar o no
 	 */
 	public boolean PuedoAvanzar(Rectangle r) {
-		// Verifica que la siguiente posición esté disponible
-		
-		
-		return false;
+		// Verifica que la siguiente posición esté disponible TODO
+		return true;
 	}
 	
 	/* Comandos */
@@ -59,7 +57,7 @@ public class Mapa {
 	 */
 	public void Avanzar(Rectangle r) {
 		// Requiere que se haya verificado que puede avanzar
-		r.getBounds().x -= 7;
+		r.setBounds(r.getBounds().x - 7, r.getBounds().y, r.getBounds().width, r.getBounds().height);
 		gui.ActualizarGrafica();
 	}
 	
@@ -70,13 +68,17 @@ public class Mapa {
 	public ObjetoDelJuego AgregarEnemigo() { //retorna el enemigo
 		Random r = new Random();
 		int y = r.nextInt(6);
-		ObjetoDelJuego e = new Enemigo1(9, y, this);
+		ObjetoDelJuego e = new Enemigo1(600, y*90, this);
+		// gameObjects.add(e);
 		gui.ActualizarGrafica();
 		return e;
 	}
+	
+	
 	//Crea el aliado y lo retorna
 	public ObjetoDelJuego AgregarAliado(int x, int y) { //retorna el aliado
 		Aliado a = new Aliado1(x,y,this);
+		gameObjects.add(a);
 		gui.ActualizarGrafica();
 		return a;
 		

@@ -144,16 +144,13 @@ public class Gui {
 	
 	
 	public void ActualizarGrafica() {
-		int current = 1;
 		JLabel dibujo;
 		for (ObjetoDelJuego pos: nivel.getObjetosDelMapa()) {
 				if( pos != null) {
 					dibujo = new JLabel();
-					System.out.println("Hay " + current++ + " dibujo/s");
 					dibujo.setBounds(pos.getHitBox());
 					dibujo.setIcon(new ImageIcon(pos.getImagen()));
-					panelMapa.add(dibujo);
-					System.out.println(dibujo.getBounds().toString());
+					//panelMapa.add(dibujo);
 				}	
 			}
 		panelMapa.repaint();
@@ -177,12 +174,12 @@ public class Gui {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			nivel.HordaHardcodeada();
 			Enemigo e=nivel.CrearEnemigo();
+			/*nivel.HordaHardcodeada();
 			JLabel dib=new JLabel();
 			dib.setBounds(e.getHitBox());
 			dib.setIcon(new ImageIcon(e.getImagen()));
-			panelMapa.add(dib);
+			panelMapa.add(dib);*/
 			panelMapa.repaint();
 			
 		}
@@ -193,6 +190,7 @@ public class Gui {
 		public void actionPerformed(ActionEvent arg0) {
 			
 			//nivel.Eliminar(ObjetoDelJuego o);
+			nivel.EliminarTodosLosEnemigos();
 			panelMapa.repaint();
 		}
 	}
@@ -203,6 +201,7 @@ public class Gui {
 			try {
 				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
 				nivel.CrearAliado(currentCharacter, e.getX(), e.getY());
+				panelMapa.removeMouseListener( panelMapa.getMouseListeners()[0] );
 				panelMapa.repaint();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

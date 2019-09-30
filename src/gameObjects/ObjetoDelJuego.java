@@ -9,7 +9,6 @@ import Observer.IObserved;
 import Observer.IObserver;
 import Visitor.Visitor;
 import logic.Mapa;
-import java.awt.Rectangle;
 
 public abstract class ObjetoDelJuego implements IObserved{
 	
@@ -22,6 +21,10 @@ public abstract class ObjetoDelJuego implements IObserved{
 	public void aceptar(Visitor v) {} //Is this right??
 	
 	public Image getImagen() {//habria que ver != null 
+		if(img == null) {
+			System.out.println("NULA IMAGEN");
+			return null;
+		}
 		return img; 
 	}
 	public void agregarObservador(IObserver obs) {
@@ -51,7 +54,6 @@ public abstract class ObjetoDelJuego implements IObserved{
 	}
 	//devuelve el rectangulo
 	public Rectangle getHitBox() {
-		// TODO Auto-generated method stub
-		return null;
+		return rectangulo;
 	}
 }

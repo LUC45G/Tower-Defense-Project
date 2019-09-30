@@ -18,7 +18,7 @@ public class Enemigo1 extends Enemigo {
 		int w = img.getWidth(null);
 		int h = img.getHeight(null);
 		//y fijo, altura fijo, anchura fijo, solo cammbia la coordenada x
-		rectangulo = new Rectangle (0,0,-w,-h);//x,y,widht,height
+		rectangulo = new Rectangle (x,y,w,h);//x,y,widht,height
 	}
 
 	@Override

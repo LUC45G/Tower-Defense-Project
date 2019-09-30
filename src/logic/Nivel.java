@@ -52,39 +52,42 @@ public class Nivel extends Thread {
 	public void HordaHardcodeada() {
 		
 		ObjetoDelJuego c = mapa.AgregarEnemigo();
-		Enemigo e = new Enemigo1(c.getX(), c.getY(), mapa);
-		listaDeEnemigos.add(e);
-
-		// Agregar enemigo al mapa TODO
+		listaDeEnemigos.add( (Enemigo) c );
 		
 	}
 	
 	//El aliado sabe sus coordenadas x,y y conoce al mapa 
 	public Image CrearAliado(Image i, int x, int y) {
 		ObjetoDelJuego c = mapa.AgregarAliado(x, y);
-		Aliado a = new Aliado1(x,y,mapa);
-		
-		// Agregar aliado al mapa TODO
 		
 		return i;
 	}
 	
 	public void EliminarTodosLosEnemigos() {
-		for(int i = 0; i < listaDeEnemigos.size(); i++) { 
-			mapa.limparObjeto(listaDeEnemigos.get(i).getX(), listaDeEnemigos.get(i).getY());
+		for(int i = 0; i < listaDeEnemigos.size(); i++)  
 			listaDeEnemigos.remove(i);
-		}
 	}
 	
 	/**
 	 * Metodo que devuelve un iterable con todos los objetos del mapa actuales
-	 * @return
+	 * @return un iterable con todos los objetos del juego 
 	 */
+	@SuppressWarnings("unchecked")
 	public Iterable<ObjetoDelJuego> getObjetosDelMapa() {
-		return mapa.getMapa();
+		
+		// Pido al mapa los objetos que no sean enemigos, y le agrego los enemigos que guarda el nivel
+		ArrayList<ObjetoDelJuego> it = new ArrayList<ObjetoDelJuego>();	
+		it = (ArrayList<ObjetoDelJuego>) mapa.getMapa().clone();
+		ArrayList<Enemigo> clon = (ArrayList<Enemigo>) listaDeEnemigos.clone();
+		it.addAll(clon);
+		
+		System.out.println(it.size());
+		return it;
 	}
 
 	public Enemigo CrearEnemigo() {
-		return (Enemigo) mapa.AgregarEnemigo();
+		ObjetoDelJuego c = mapa.AgregarEnemigo();
+		listaDeEnemigos.add( (Enemigo) c );
+		return (Enemigo) c;
 	}
 }
