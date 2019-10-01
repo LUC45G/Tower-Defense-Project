@@ -40,4 +40,5 @@ public abstract class Enemigo extends Personaje {
 	public void recibirAtaque() {
 		return;
 	}
+	
 }

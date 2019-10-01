@@ -18,6 +18,8 @@ public abstract class ObjetoDelJuego implements IObserved{
 	protected int x, y;
 	protected Mapa mapa;
 	protected ArrayList<IObserver> observadores = new ArrayList<IObserver>();
+	protected IObserver observer;
+	
 	public void aceptar(Visitor v) {} //Is this right??
 	
 	public Image getImagen() {//habria que ver != null 
@@ -55,5 +57,9 @@ public abstract class ObjetoDelJuego implements IObserved{
 	//devuelve el rectangulo
 	public Rectangle getHitBox() {
 		return rectangulo;
+	}
+	
+	public void eliminar () {//elimina el personaje del mapa
+		observer.notificar();	
 	}
 }

@@ -34,5 +34,4 @@ public class Enemigo1 extends Enemigo {
 		// despues calcula si tiene que dropear item, oro o lo que sea
 	}
 
-	
 }
