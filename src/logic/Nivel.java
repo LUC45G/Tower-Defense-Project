@@ -16,27 +16,39 @@ import javax.swing.ImageIcon;
 public class Nivel extends Thread {
 	
 	private Mapa mapa; // Un solo mapa y muchos niveles o como hacemos ?¿
-	private ObjetoDelMapa[] objetos; // Coleccion de objetos aleatorios a poner en el mapa
+	private ArrayList<ObjetoDelMapa> objetos; // Coleccion de objetos aleatorios a poner en el mapa
 	private Horda[] hordas; // Almacena las hordas del nivel
 	private ArrayList<Enemigo> listaDeEnemigos; // Lista que almacena enemigos para que avancen
 	private int dificultad; // La dificultad hace variar la cantidad de enemigos entre otras cosas
 	private int nivelActual; // Nivel actual, para saber que horda liberar
 	
-	public Nivel(Mapa m) {
+	private static Nivel INSTANCE = null;
+	
+	private Nivel(Mapa m) {
 		mapa = m;
 		listaDeEnemigos = new ArrayList<Enemigo>();
+		dificultad = 1;
+		nivelActual = 1;
+	}
+	
+	public static Nivel getNivel(Mapa m) {
+		if(INSTANCE == null)
+			INSTANCE = new Nivel(m);
+		
+		return INSTANCE;
 	}
 	
 	public void run() {
+		System.out.println("Arranca nivel " + nivelActual);
 		while(true){
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			
 			if(listaDeEnemigos.size() == 0) {
-				System.out.println("No hay enemigos");
+				System.out.println("cero");
 				mapa.Update();
 				continue;
 			}
@@ -63,9 +75,11 @@ public class Nivel extends Thread {
 		return i;
 	}
 	
+	/**
+	 * Elimina todos los enemigos del juego
+	 */
 	public void EliminarTodosLosEnemigos() {
-		for(int i = 0; i < listaDeEnemigos.size(); i++)  
-			listaDeEnemigos.remove(i);
+		listaDeEnemigos.removeAll(listaDeEnemigos);
 	}
 	
 	/**
@@ -77,11 +91,10 @@ public class Nivel extends Thread {
 		
 		// Pido al mapa los objetos que no sean enemigos, y le agrego los enemigos que guarda el nivel
 		ArrayList<ObjetoDelJuego> it = new ArrayList<ObjetoDelJuego>();	
-		it = (ArrayList<ObjetoDelJuego>) mapa.getMapa().clone();
+		it = (ArrayList<ObjetoDelJuego>) mapa.getGameObjects().clone();
 		ArrayList<Enemigo> clon = (ArrayList<Enemigo>) listaDeEnemigos.clone();
 		it.addAll(clon);
 		
-		System.out.println(it.size());
 		return it;
 	}
 

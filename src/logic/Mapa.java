@@ -20,12 +20,8 @@ public class Mapa {
 	
 	/* Constructor */
 	// El mapa tiene todo null al crearse
-	
-	public Mapa( Gui g ) {
-		if(INSTANCE!= null)
-			System.out.println("Error");
+	private Mapa(Gui g) {
 		gui = g;
-		INSTANCE = this;		
 	}
 	
 	/* Consultas */
@@ -33,12 +29,19 @@ public class Mapa {
 	/**
 	 * @return la instancia de mapa
 	 */
-	public Mapa getInstance() { return INSTANCE; }
+	public static Mapa getMapa( Gui g ) {
+
+		if(INSTANCE == null)
+			INSTANCE = new Mapa(g);
+		
+		return INSTANCE;
+	}
+	
 	
 	/**
 	 * @return una lista con todos los objetos del juego activos al momento
 	 */
-	public ArrayList<ObjetoDelJuego> getMapa() { return gameObjects; }
+	public ArrayList<ObjetoDelJuego> getGameObjects() { return gameObjects; }
 	
 	/**
 	 * @param r el rectangulo del gameObject
@@ -46,7 +49,17 @@ public class Mapa {
 	 */
 	public boolean PuedoAvanzar(Rectangle r) {
 		// Verifica que la siguiente posición esté disponible TODO
-		return true;
+		boolean colisiona = false;
+		int i = 0;
+		Rectangle auxRectangle = new Rectangle( r.x+7, r.y, r.height, r.width );
+		ArrayList<ObjetoDelJuego> all = (ArrayList<ObjetoDelJuego>) Nivel.getNivel(INSTANCE).getObjetosDelMapa();
+		
+		while ( !colisiona && i < all.size()) {
+			colisiona = auxRectangle.intersects(all.get(i++).getHitBox());
+		}
+		
+		
+		return !colisiona;
 	}
 	
 	/* Comandos */
@@ -63,12 +76,12 @@ public class Mapa {
 	
 	/**
 	 * Agrega un enemigo al final
-	 * @return
+	 * @return el enemigo agregado
 	 */
-	public ObjetoDelJuego AgregarEnemigo() { //retorna el enemigo
+	public ObjetoDelJuego AgregarEnemigo() { 
 		Random r = new Random();
 		int y = r.nextInt(6);
-		ObjetoDelJuego e = new Enemigo1(600, y*90, this);
+		ObjetoDelJuego e = new Enemigo1(600, y*90, INSTANCE);
 		// gameObjects.add(e);
 		gui.ActualizarGrafica();
 		return e;
@@ -77,7 +90,7 @@ public class Mapa {
 	
 	//Crea el aliado y lo retorna
 	public ObjetoDelJuego AgregarAliado(int x, int y) { //retorna el aliado
-		Aliado a = new Aliado1(x,y,this);
+		Aliado a = new Aliado1(x,y,INSTANCE);
 		gameObjects.add(a);
 		gui.ActualizarGrafica();
 		return a;

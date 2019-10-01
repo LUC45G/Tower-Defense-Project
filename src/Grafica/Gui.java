@@ -29,7 +29,6 @@ public class Gui {
 	private JPanel panelMapa;
 	private Image currentCharacter;
 	private Nivel nivel;
-	private JLabel[][] labels;
 	private JLabel lblScore;
 
 	/**
@@ -60,9 +59,8 @@ public class Gui {
 	 */
 	private void initialize() {
 		
-		nivel = new Nivel( new Mapa(this) );
+		nivel = Nivel.getNivel( Mapa.getMapa(this) );
 		nivel.start();
-		labels = new JLabel[10][6];
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900, 600);
@@ -109,48 +107,16 @@ public class Gui {
 		
 	}
 	
-	@SuppressWarnings("serial")
-	private void PintarMapaVacio() {
-		for(int i = 0; i < 6; i++) {
-			for (int j = 0; j<10; j++) {
-				
-				int auxI = i;
-				int auxJ = j;
-				
-				MyLabel lbl = new MyLabel("lbl"+j+","+i);
-				lbl.setBorder(new LineBorder(new Color(0, 0, 0)));
-				
-				lbl.addActionListener( new AbstractAction("btn"+j+i) {
-				    public void actionPerformed(ActionEvent e) {
-				    	
-				        
-				    	if(currentCharacter!=null) {
-				    		nivel.CrearAliado(currentCharacter, auxJ, auxI);
-				        	if(lbl.getIcon() == null) {
-					        	lbl.setIcon( new ImageIcon(currentCharacter));
-					        	currentCharacter=null;
-					        	}
-					        }
-					    }
-				    
-				});
-				
-				labels[j][i] = lbl;
-				panelMapa.add( lbl );
-			}
-		}
-		
-	}
-	
 	
 	public void ActualizarGrafica() {
 		JLabel dibujo;
+		panelMapa.removeAll();
 		for (ObjetoDelJuego pos: nivel.getObjetosDelMapa()) {
 				if( pos != null) {
 					dibujo = new JLabel();
 					dibujo.setBounds(pos.getHitBox());
 					dibujo.setIcon(new ImageIcon(pos.getImagen()));
-					//panelMapa.add(dibujo);
+					panelMapa.add(dibujo);
 				}	
 			}
 		panelMapa.repaint();

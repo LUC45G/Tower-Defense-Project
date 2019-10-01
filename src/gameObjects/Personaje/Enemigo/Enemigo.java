@@ -33,8 +33,10 @@ public abstract class Enemigo extends Personaje {
 	}
 	
 	public void Avanzar() {
-		if(mapa.PuedoAvanzar(rectangulo) ) 
+		if(mapa.PuedoAvanzar(rectangulo) ) {
 			mapa.Avanzar(rectangulo);
+			System.out.println("Enemigo movido");
+		}
 	}
 
 	public void recibirAtaque() {
