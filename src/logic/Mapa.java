@@ -51,13 +51,20 @@ public class Mapa {
 		// Verifica que la siguiente posición esté disponible TODO
 		boolean colisiona = false;
 		int i = 0;
-		Rectangle auxRectangle = new Rectangle( r.x+7, r.y, r.height, r.width );
+		Rectangle auxRectangle = new Rectangle( r.x-7, r.y, r.height, r.width );
 		ArrayList<ObjetoDelJuego> all = (ArrayList<ObjetoDelJuego>) Nivel.getNivel(INSTANCE).getObjetosDelMapa();
 		
+		System.out.println(all.size());
+		
 		while ( !colisiona && i < all.size()) {
-			colisiona = auxRectangle.intersects(all.get(i++).getHitBox());
+			if(all.get(i).getHitBox() != r) {
+				System.out.println("Es distinto");
+				colisiona = auxRectangle.intersects(all.get(i++).getHitBox());
+			}
 		}
 		
+		if(colisiona)
+			System.out.println("Detecto algo");
 		
 		return !colisiona;
 	}

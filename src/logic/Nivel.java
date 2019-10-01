@@ -48,7 +48,7 @@ public class Nivel extends Thread {
 			}
 			
 			if(listaDeEnemigos.size() == 0) {
-				System.out.println("cero");
+				// System.out.println("cero");
 				mapa.Update();
 				continue;
 			}
