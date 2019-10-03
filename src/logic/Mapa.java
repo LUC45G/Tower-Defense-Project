@@ -27,13 +27,23 @@ public class Mapa {
 	/* Consultas */
 	
 	/**
-	 * @return la instancia de mapa
+	 * Devuelve la instancia del mapa. Si no esta creada, la crea.
+	 * @param g GUI
+	 * @return Mapa
 	 */
 	public static Mapa getMapa( Gui g ) {
 
 		if(INSTANCE == null)
 			INSTANCE = new Mapa(g);
 		
+		return INSTANCE;
+	}
+	
+	/**
+	 * Devuelve la instancia del mapa. Asume que ya esta creada
+	 * @return Mapa
+	 */
+	public static Mapa getMapa() {
 		return INSTANCE;
 	}
 	
@@ -101,10 +111,8 @@ public class Mapa {
 		gui.ActualizarGrafica();
 	}
 	
-	
-	
-	public void limparObjeto(int x, int y) {
-		
+	public void EliminarObjetoDelJuego(ObjetoDelJuego obj) {
+		gameObjects.remove(obj);
 	}
 	
 	//En vez de retornar una Image retorna un JLabel con la imagen dentro

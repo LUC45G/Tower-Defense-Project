@@ -59,7 +59,7 @@ public abstract class ObjetoDelJuego implements IObserved{
 		return rectangulo;
 	}
 	
-	public void eliminar () {//elimina el personaje del mapa
-		observer.notificar();	
+	public void notificar () {//elimina el personaje del mapa
+		observer.update(this);	
 	}
 }

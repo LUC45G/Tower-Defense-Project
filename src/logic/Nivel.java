@@ -31,10 +31,23 @@ public class Nivel extends Thread {
 		nivelActual = 1;
 	}
 	
+	/**
+	 * Devuelve la instancia del nivel. Si no esta creado, lo crea.
+	 * @param m Mapa
+	 * @return Nivel
+	 */
 	public static Nivel getNivel(Mapa m) {
 		if(INSTANCE == null)
 			INSTANCE = new Nivel(m);
 		
+		return INSTANCE;
+	}
+	
+	/**
+	 * Devuelve la instancia del nivel. Asume que ya esta creado
+	 * @return Nivel
+	 */
+	public static Nivel getNivel() {
 		return INSTANCE;
 	}
 	
@@ -80,6 +93,14 @@ public class Nivel extends Thread {
 	 */
 	public void EliminarTodosLosEnemigos() {
 		listaDeEnemigos.removeAll(listaDeEnemigos);
+	}
+	
+	/**
+	 * Elimina un enemigo
+	 * @param e enemigo a eliminar
+	 */
+	public void Eliminar(ObjetoDelJuego e) {
+		listaDeEnemigos.remove(e);
 	}
 	
 	/**

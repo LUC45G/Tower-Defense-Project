@@ -38,7 +38,7 @@ public class Rango implements IObserver{
 	
 	//Comandos
 	//ya esta comentado
-	public void update() {//puede hacer mas cosas esta en veremos
+	public void update(ObjetoDelJuego obj) {//puede hacer mas cosas esta en veremos
 		reaccionar(miPersonaje);
 		
 	}

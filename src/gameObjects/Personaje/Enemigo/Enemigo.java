@@ -1,13 +1,14 @@
 package gameObjects.Personaje.Enemigo;
 import gameObjects.Item.Premio.Premio;
+import Observer.EnemyObserver;
 import gameObjects.Personaje.Personaje;
-import logic.Celda;
 import logic.Mapa;
 import Visitor.*;
 
 public abstract class Enemigo extends Personaje {
 
 	protected Premio premio;
+	protected EnemyObserver enemyObserver;
 	
 	
 	/* Constructor */
@@ -39,8 +40,9 @@ public abstract class Enemigo extends Personaje {
 		}
 	}
 
-	public void recibirAtaque() {
-		return;
+	@Override
+	public void notificar() {
+		enemyObserver.update(this);
 	}
 	
 }

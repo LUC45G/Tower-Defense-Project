@@ -4,9 +4,12 @@ import logic.*;
 
 public class Morirse implements IObserver{
 	protected Mapa map;
-	protected ObjetoDelJuego objeto;
 	
-	public void update() {
-		map.eliminarObjeto(objeto);
+	public Morirse() {
+		map = Mapa.getMapa();
+	}
+	
+	public void update(ObjetoDelJuego obj) {
+		map.EliminarObjetoDelJuego(obj);
 	}
 }

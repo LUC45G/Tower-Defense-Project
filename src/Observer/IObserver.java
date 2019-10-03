@@ -1,4 +1,5 @@
 package Observer;
+import gameObjects.ObjetoDelJuego;
 
 /**
  * 
@@ -11,5 +12,5 @@ public interface IObserver {
 	/**
 	 * Metodo donde se realizara la operacion designada para el cambio de estado
 	 */
-	public void update();
+	public void update(ObjetoDelJuego obj);
 }
