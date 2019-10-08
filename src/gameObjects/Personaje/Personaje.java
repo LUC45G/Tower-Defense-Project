@@ -8,6 +8,7 @@ public abstract class Personaje extends ObjetoDelJuego {
 	protected int damage;
 	protected Rango rango;
 	protected VisitorDisparo proyectil;
+	protected IObserver eliminar;
 	
 	public abstract void atacar();
 	
@@ -15,12 +16,9 @@ public abstract class Personaje extends ObjetoDelJuego {
 		vida--;
 	}
 	
-	public void eliminar() {
-		// Elimina al personaje del mapa
-	}
-	
 	public ObjetoDelJuego[][] getMapa() {
 		return null; //return mapa.getMapa();
 	}
+	
 	public void notificar() {}
 }

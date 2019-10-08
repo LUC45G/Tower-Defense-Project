@@ -9,7 +9,7 @@ public class VisitorClick extends Visitor {
 
 	@Override
 	public void visitarEnemigo(Enemigo e) {
-		e.eliminar(); //implementar metodo eliminar y ver si es mas general
+		
 	}
 
 	@Override

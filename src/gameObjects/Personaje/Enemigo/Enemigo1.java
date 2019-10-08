@@ -26,13 +26,4 @@ public class Enemigo1 extends Enemigo {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public void eliminar() {
-		super.eliminar();
-		// Delega a Personaje que lo elimine del mapa,
-		// despues calcula si tiene que dropear item, oro o lo que sea
-	}
-
-	
 }
