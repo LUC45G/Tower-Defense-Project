@@ -27,7 +27,7 @@ import java.awt.Rectangle;
 public class Gui {
 
 	private JFrame frame;
-	private JPanelClickeable panelMapa;
+	private JPanel panelMapa;
 	private Image currentCharacter;
 	private Nivel nivel;
 	private JLabel lblScore;
@@ -90,11 +90,12 @@ public class Gui {
 		
 		JButton btnPersonaje5 = new JButton("5");
 		panelPersonajes.add(btnPersonaje5);
-		panelMapa = new JPanelClickeable();
+		panelMapa = new JPanel();
 		panelMapa.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(currentCharacter!=null) {
-					nivel.CrearAliado(currentCharacter, 9, 6);
+				
+				if(!nivel.carritoVacio()) {
+					nivel.CrearAliado(currentCharacter, e.getX(), (e.getY()/90)*90);
 					System.out.println("clikeado");
 				}
 			}
@@ -122,8 +123,7 @@ public class Gui {
 		for (ObjetoDelJuego pos: nivel.getObjetosDelMapa()) {
 				if( pos != null) {
 					dibujo = new JLabel();
-					//dibujo.setBounds(pos.getHitBox());
-					dibujo.setBounds(pos.getX(),pos.getY(),70,70);
+					dibujo.setBounds(pos.getHitBox());
 					dibujo.setIcon(new ImageIcon(pos.getImagen()));
 					panelMapa.add(dibujo);
 				}	
@@ -135,7 +135,6 @@ public class Gui {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			try {
-			
 				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -148,13 +147,8 @@ public class Gui {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			Enemigo e=nivel.CrearEnemigo();
-			/*nivel.HordaHardcodeada();
-			JLabel dib=new JLabel();
-			dib.setBounds(e.getHitBox());
-			dib.setIcon(new ImageIcon(e.getImagen()));
-			panelMapa.add(dib);*/
-			panelMapa.repaint();
+			nivel.CrearEnemigo();
+			ActualizarGrafica();
 			
 		}
 	}

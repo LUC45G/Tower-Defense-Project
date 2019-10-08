@@ -61,11 +61,16 @@ public class Mapa {
 		// Verifica que la siguiente posición esté disponible TODO
 		boolean colisiona = false;
 		int i = 0;
-		Rectangle auxRectangle = new Rectangle( r.x+7, r.y, r.height, r.width );
-		ArrayList<ObjetoDelJuego> all = (ArrayList<ObjetoDelJuego>) Nivel.getNivel(INSTANCE).getObjetosDelMapa();
+		Rectangle auxRectangle = new Rectangle( r.x-7, r.y, r.height, r.width );
+		ArrayList<ObjetoDelJuego> all = (ArrayList<ObjetoDelJuego>) Nivel.getNivel().getObjetosDelMapa();
 		
 		while ( !colisiona && i < all.size()) {
-			colisiona = auxRectangle.intersects(all.get(i++).getHitBox());
+			if(all.get(i).getHitBox() != r) {
+				colisiona = auxRectangle.intersects(all.get(i).getHitBox());
+			}
+			
+			
+			i++;
 		}
 		
 		

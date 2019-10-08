@@ -2,6 +2,7 @@ package logic;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -9,7 +10,7 @@ import javax.swing.JLabel;
 import gameObjects.ObjetoDelMapa.*;
 import gameObjects.Personaje.Enemigo.*;
 import gameObjects.Personaje.Aliado.*;
-import gameObjects.ObjetoDelJuego;
+import gameObjects.ObjetoDelJuego;import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 
@@ -21,7 +22,7 @@ public class Nivel extends Thread {
 	private ArrayList<Enemigo> listaDeEnemigos; // Lista que almacena enemigos para que avancen
 	private int dificultad; // La dificultad hace variar la cantidad de enemigos entre otras cosas
 	private int nivelActual; // Nivel actual, para saber que horda liberar
-	
+	private Aliado currentCharacter;
 	private static Nivel INSTANCE = null;
 	
 	private Nivel(Mapa m) {
@@ -61,7 +62,7 @@ public class Nivel extends Thread {
 			}
 			
 			if(listaDeEnemigos.size() == 0) {
-				System.out.println("cero");
+				// System.out.println("cero");
 				mapa.Update();
 				continue;
 			}
@@ -84,7 +85,7 @@ public class Nivel extends Thread {
 	//El aliado sabe sus coordenadas x,y y conoce al mapa 
 	public Image CrearAliado(Image i, int x, int y) {
 		ObjetoDelJuego c = mapa.AgregarAliado(x, y);
-		
+		currentCharacter = (Aliado) c;
 		return i;
 	}
 	
@@ -118,7 +119,16 @@ public class Nivel extends Thread {
 		
 		return it;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean carritoVacio() {
+		return false;
+	}
+	public ObjetoDelJuego getCarrito() {
+			return currentCharacter;
+	}
 	public Enemigo CrearEnemigo() {
 		ObjetoDelJuego c = mapa.AgregarEnemigo();
 		listaDeEnemigos.add( (Enemigo) c );

@@ -29,6 +29,9 @@ public abstract class ObjetoDelJuego implements IObserved{
 		}
 		return img; 
 	}
+	public void setImagen(Image i) {
+		img=i;
+	}
 	public void agregarObservador(IObserver obs) {
 		observadores.add(obs);
 	}

@@ -16,23 +16,14 @@ public class JPanelClickeable extends JPanel{
 
 		    super();
 
-		    addMouseListener(new MouseAdapter() {
-		      public void mouseClicked(MouseEvent me) {
-		        fireActionPerformed(new MouseEvent(JPanelClickeable.this, HEIGHT, HEIGHT, HEIGHT, HEIGHT, HEIGHT, PROPERTIES, getAutoscrolls()) {
-		        	
-		        });
-		      }
-
-		    });
 	 }
-	 
-	 public void addActionListener(ActionListener l) {
-		    listenerList.add(ActionListener.class, l);
-		  }
 	 public void addMouseListener(MouseListener l) {
 		    listenerList.add(MouseListener.class, l);
 		  }
-
+	/** public void addActionListener(ActionListener l) {
+		    listenerList.add(ActionListener.class, l);
+		  }
+*/
 
 	  public void removeActionListener(ActionListener l) {
 	    listenerList.remove(ActionListener.class, l);
@@ -42,7 +33,7 @@ public class JPanelClickeable extends JPanel{
 		    Object[] listeners = listenerList.getListeners(MouseListener.class);
 	
 		    for (int i = 0; i < listeners.length; i++) {
-		      ((MouseListener) listeners[i]).mouseClicked(s);
+		      ((MouseAdapter) listeners[i]).mouseClicked(s);
 		    }
 	  }
 }
