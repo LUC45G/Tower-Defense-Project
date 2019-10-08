@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
@@ -26,7 +27,7 @@ import java.awt.Rectangle;
 public class Gui {
 
 	private JFrame frame;
-	private JPanel panelMapa;
+	private JPanelClickeable panelMapa;
 	private Image currentCharacter;
 	private Nivel nivel;
 	private JLabel lblScore;
@@ -89,16 +90,23 @@ public class Gui {
 		
 		JButton btnPersonaje5 = new JButton("5");
 		panelPersonajes.add(btnPersonaje5);
-		
-		panelMapa = new JPanel();
+		panelMapa = new JPanelClickeable();
+		panelMapa.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(currentCharacter!=null) {
+					nivel.CrearAliado(currentCharacter, 9, 6);
+					System.out.println("clikeado");
+				}
+			}
+		});
 		panelMapa.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelMapa.setBounds(192, 0, 692, 551);
 		panelMapa.setLayout(null);
-		frame.getContentPane().add(panelMapa);
 		
 		JPanel panelScore = new JPanel();
 		panelScore.setBounds(0, 338, 141, 213);
 		frame.getContentPane().add(panelScore);
+		frame.getContentPane().add(panelMapa);
 		
 		lblScore = new JLabel("Score: 0");
 		panelScore.add(lblScore);
@@ -114,7 +122,8 @@ public class Gui {
 		for (ObjetoDelJuego pos: nivel.getObjetosDelMapa()) {
 				if( pos != null) {
 					dibujo = new JLabel();
-					dibujo.setBounds(pos.getHitBox());
+					//dibujo.setBounds(pos.getHitBox());
+					dibujo.setBounds(pos.getX(),pos.getY(),70,70);
 					dibujo.setIcon(new ImageIcon(pos.getImagen()));
 					panelMapa.add(dibujo);
 				}	
@@ -125,10 +134,9 @@ public class Gui {
 	private class btn1AL implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
 			try {
+			
 				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
-				panelMapa.addMouseListener(new Clic());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -160,44 +168,6 @@ public class Gui {
 			panelMapa.repaint();
 		}
 	}
-	private class Clic implements MouseListener {
 		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			try {
-				currentCharacter = ImageIO.read(getClass().getResource("/images/s.png"));
-				nivel.CrearAliado(currentCharacter, e.getX(), e.getY());
-				panelMapa.removeMouseListener( panelMapa.getMouseListeners()[0] );
-				panelMapa.repaint();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
+		
 }
